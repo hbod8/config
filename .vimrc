@@ -1,3 +1,8 @@
+"
+" Vim Config
+" Harry Saliba 2022
+"
+
 set number          " Show line numbers
 set showmatch       " Highlight matching brace
 

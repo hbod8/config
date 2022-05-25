@@ -1,9 +1,8 @@
 #!/bin/sh
 
 #
-# Harry Saliba 2022
-#
 # Install Command Line tools
+# Harry Saliba 2022
 #
 
 PKS=""

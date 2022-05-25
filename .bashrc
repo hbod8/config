@@ -1,5 +1,6 @@
 #
-# ~/.bashrc
+# Bash Config
+# Harry Saliba 2022
 #
 
 [[ $- != *i* ]] && return
@@ -33,7 +34,6 @@ colors() {
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-# Change the window title of X terminals
 case ${TERM} in
 	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
 		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
@@ -45,12 +45,7 @@ esac
 
 use_color=true
 
-# Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
+safe_term=${TERM//[^[:alnum:]]/?}
 match_lhs=""
 [[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
 [[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
@@ -90,13 +85,17 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias rm="rm -i"
+alias cp='cp -i'
+alias df='df -h'
+alias free='free -m'
+alias rm='rm -i'
 alias np='nano -w PKGBUILD'
-alias more=less
-alias pico-build='docker run -v $(pwd):/src rp2040-dev'
+alias more='less'
+alias ls='exa --icons'
+alias ll='exa --icons --long --header --git'
+alias lt='exa --icons --long --tree --level=3 --git'
+alias cat='bat'
+alias cd='z'
 
 xhost +local:root > /dev/null 2>&1
 
