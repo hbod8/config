@@ -5,17 +5,33 @@
 # Harry Saliba 2022
 #
 
+APT="apt"
+APTARGS="install -y"
+PACMAN="pacman"
+PACMANARGS="-S"
+YUM="yum"
+YUMARGS="install -y"
 PKS=""
 CMDS=""
 
-function require {
-  if which $1 &> /dev/null
+check_install () {
+  command -v $1
+}
+
+require () {
+  if check_install "$1" > /dev/null 2>&1
   then
     echo "$1 is installed."
   else
     echo "$1 is not installed."
-    PKS="${PKS} $1"
+    PKS="${PKS}$1 "
   fi
+}
+
+install () {
+  echo "found $1"
+  sudo $1 $2 $3
+  eval "$CMDS"
 }
 
 require "bash"
@@ -29,7 +45,7 @@ require "fzf"
 require "zoxide"
 require "mc"
 
-if ls ~/powerlevel10k > /dev/null
+if ls ~/powerlevel10k > /dev/null 2>&1
 then
   echo "powerlevel10k theme is installed."
 else
@@ -37,26 +53,24 @@ else
   CMDS="$CMDS git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k;"
 fi
 
-echo "attempting to install using a package manager..."
-
-if which apt &> /dev/null
+if test "$PKS"
 then
-  echo "found apt"
-  sudo apt install -y $PKS
-  eval $CMDS
-elif which yum &> /dev/null
-then
-  echo "found yum"
-  sudo yum install -y $PKS
-  eval $CMDS
-elif which pacman &> /dev/null
-then
-  echo "found pacman"
-  sudo pacman -S --noconfirm $PKS
-  eval $CMDS
+  echo "attempting to install $PKS using a package manager..."
+  if check_install "$APT" > /dev/null 2>&1
+  then
+    install "$APT" "$APTARGS" "$PKS"
+  elif check_install "$YUM" > /dev/null 2>&1
+  then
+    install "$YUM" "$YUMARGS" "$PKS"
+  elif check_install "$PACMAN" > /dev/null 2>&1
+  then
+    install "$PACMAN" "$PACMANARGS" "$PKS"
+  else
+    echo "no package manager found, install these packages:"
+    echo "$PKS"
+    echo "and run:"
+    echo "$CMDS"
+  fi
 else
-  echo "no package manager found, install these packages:"
-  echo $PKS
-  echo "and run:"
-  echo $CMDS
+  echo "all dependencies installed."
 fi
