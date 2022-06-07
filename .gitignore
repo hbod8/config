@@ -1,0 +1,11 @@
+*
+!.gitignore
+!.zshrc
+!.bashrc
+!.vimrc
+!install-tools.sh
+!DejaVuNerdFont.ttf
+!ingest.sh
+!backup.sh
+!.ssh/config
+!powerlevel10k/powerlevel10k.zsh-theme
