@@ -91,11 +91,11 @@ alias free='free -m'
 alias rm='rm -i'
 alias np='nano -w PKGBUILD'
 alias more='less'
-alias ls='exa --icons'
-alias ll='exa --icons --long --header --git'
-alias lt='exa --icons --long --tree --level=3 --git'
-alias cat='bat'
-alias cd='z'
+#alias ls='exa --icons'
+#alias ll='exa --icons --long --header --git'
+#alias lt='exa --icons --long --tree --level=3 --git'
+#alias cat='bat'
+#alias cd='z'
 
 xhost +local:root > /dev/null 2>&1
 
