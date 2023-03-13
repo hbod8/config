@@ -11,16 +11,15 @@ alias cp='cp -i'
 alias df='df -h'
 alias free='free -m'
 alias rm='rm -i'
-alias np='nano -w PKGBUILD'
 alias more='less'
-alias ls='exa --icons'
-alias ll='exa --icons --long --header --git'
-alias lt='exa --icons --long --tree --level=3 --git'
-alias cat='bat'
-alias cd='z'
+#alias ls='exa --icons'
+#alias ll='exa --icons --long --header --git'
+#alias lt='exa --icons --long --tree --level=3 --git'
+#alias cat='bat'
+#alias cd='z'
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+#source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
